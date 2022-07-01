@@ -1,0 +1,53 @@
+public static void mergeSort(int[] nums, int start, int end){
+        if(end <= start) {
+
+            return;
+        }
+            int mid = (start+end)/2;
+            mergeSort(nums,start,mid);
+            mergeSort(nums,mid+1,end);
+            merge(nums,start,mid,end);
+    }
+    
+    
+  public static void merge(int[] nums, int start, int mid, int end){
+        int[] tempArray = new int[end-start+1];
+
+        int left = start; //runner for left side of array
+
+        int right = mid+1; // runner for right side of array
+
+        int slot = 0; //counter for temp array
+
+        while(left <= mid && right <= end){
+            if(nums[left]<nums[right]){
+                tempArray[slot] = nums[left];
+                left++;
+            }
+            else{
+                tempArray[slot] = nums[right];
+                right++;
+            }
+
+
+            slot++;
+        }
+
+        if(left<=mid) {
+            while (left <= mid) {
+                tempArray[slot] = nums[left];
+                left++;
+                slot++;
+            }
+        } else if(right<=end){
+            while(right<=end) {
+                tempArray[slot] = nums[right];
+                right++;
+                slot++;
+            }
+        }
+
+        for(int i = 0; i<tempArray.length;i++){
+            nums[start+i] = tempArray[i];
+        }
+    }
